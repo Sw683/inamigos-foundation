@@ -43,8 +43,19 @@
   box-sizing: border-box;
 }
 
-html {
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
   scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a, p, span, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
 }
 
 body {
@@ -59,7 +70,6 @@ body {
     radial-gradient(circle at 20% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
   background-attachment: fixed;
   line-height: 1.65;
-  overflow-x: hidden;
 }
 
 .container {
@@ -580,7 +590,7 @@ header {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 28px;
 }
 
@@ -762,7 +772,7 @@ header {
 
 .intern-work-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 25px;
   margin-top: 30px;
 }
@@ -824,7 +834,7 @@ header {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 20px;
 }
 
@@ -881,7 +891,7 @@ header {
 
 .social-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
   gap: 20px;
 }
 
@@ -1131,6 +1141,8 @@ footer::before {
     position: static;
     margin-top: 20px;
     max-width: 100%;
+    right: auto;
+    bottom: auto;
   }
   .footer-grid {
     grid-template-columns: 1fr;
@@ -1280,7 +1292,7 @@ footer::before {
   }
 
   .hero-content h1 {
-    font-size: 2.1rem;
+    font-size: clamp(1.85rem, 5vw, 2.35rem);
     line-height: 1.2;
   }
 
@@ -1316,6 +1328,94 @@ footer::before {
   }
 
   .form-wrapper {
-    padding: 22px 18px;
+    padding: 24px 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .intern-work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .gallery-item {
+    height: 170px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-image-badge {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .badge-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  .badge-text h5 {
+    font-size: 0.85rem;
+  }
+
+  .badge-text p {
+    font-size: 0.72rem;
+  }
+
+  .impact-counter-card h3 {
+    font-size: 1.85rem;
+  }
+
+  .form-wrapper {
+    padding: 20px 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item {
+    height: 200px;
   }
 }
