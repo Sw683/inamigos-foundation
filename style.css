@@ -845,6 +845,7 @@ header {
   height: 250px;
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-sm);
+  cursor: pointer;
 }
 
 .gallery-item img {
@@ -877,6 +878,91 @@ header {
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+/* Gallery Lightbox Modal */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background-color: rgba(5, 8, 15, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.gallery-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gallery-lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+  transform: scale(0.96);
+  transition: transform 0.25s ease;
+}
+
+.gallery-lightbox.active img {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 32px;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 10001;
+  font-family: inherit;
+  padding: 0;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08);
+}
+
+@media (max-width: 600px) {
+  .gallery-lightbox {
+    padding: 12px;
+  }
+
+  .gallery-lightbox img {
+    max-width: 94vw;
+    max-height: 80vh;
+  }
+
+  .lightbox-close {
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
 }
 
 /* Social Media Channels Section */

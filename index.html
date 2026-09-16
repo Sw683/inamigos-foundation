@@ -613,5 +613,62 @@
     }
   </script>
 
+  <!-- Field Gallery Lightbox Modal -->
+  <div id="galleryLightbox" class="gallery-lightbox" aria-hidden="true" role="dialog" aria-label="Image Preview">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close preview">&times;</button>
+    <img id="lightboxImg" src="" alt="Enlarged gallery view">
+  </div>
+
+  <!-- Gallery Lightbox Script -->
+  <script>
+    const galleryLightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    function openLightbox(src, alt) {
+      if (!galleryLightbox || !lightboxImg) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || 'Field Gallery Image';
+      galleryLightbox.classList.add('active');
+      galleryLightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      if (!galleryLightbox) return;
+      galleryLightbox.classList.remove('active');
+      galleryLightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (img) {
+          openLightbox(img.src, img.alt);
+        }
+      });
+    });
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    if (galleryLightbox) {
+      galleryLightbox.addEventListener('click', (e) => {
+        if (e.target === galleryLightbox) {
+          closeLightbox();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && galleryLightbox && galleryLightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  </script>
+
 </body>
 </html>
