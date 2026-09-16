@@ -1,0 +1,4 @@
+.vscode/
+indeginous/
+*.pyc
+__pycache__/
