@@ -41,16 +41,25 @@
         <img src="assets/logo.jpg" alt="InAmigos Foundation Logo" class="brand-logo-img">
         <span class="logo-text">InAmigos <span>Foundation</span></span>
       </a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Initiatives</a></li>
-        <li><a href="#impact">Impact</a></li>
-        <li><a href="#campaigns">#InAmigos Campaigns</a></li>
-        <li><a href="#gallery">Field Gallery</a></li>
-        <li><a href="#social">Connect</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="#join" class="btn btn-primary"><i class="fa-solid fa-hand-holding-heart"></i> Volunteer / Intern</a>
+
+      <!-- Mobile Hamburger Menu Button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Navigation Links & Action Drawer -->
+      <div class="nav-menu-wrapper" id="navMenu">
+        <ul class="nav-links">
+          <li><a href="#about"><i class="fa-solid fa-circle-info mobile-icon"></i> About</a></li>
+          <li><a href="#projects"><i class="fa-solid fa-layer-group mobile-icon"></i> Initiatives</a></li>
+          <li><a href="#impact"><i class="fa-solid fa-chart-line mobile-icon"></i> Impact</a></li>
+          <li><a href="#campaigns"><i class="fa-solid fa-bullhorn mobile-icon"></i> #InAmigos Campaigns</a></li>
+          <li><a href="#gallery"><i class="fa-solid fa-images mobile-icon"></i> Field Gallery</a></li>
+          <li><a href="#social"><i class="fa-solid fa-share-nodes mobile-icon"></i> Connect</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="#join" class="btn btn-primary nav-btn"><i class="fa-solid fa-hand-holding-heart"></i> Volunteer / Intern</a>
+        </div>
       </div>
     </div>
   </header>
@@ -551,6 +560,58 @@
       </div>
     </div>
   </footer>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = document.querySelectorAll('.nav-links a, .nav-actions a');
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', isOpen);
+        const icon = menuToggle.querySelector('i');
+        if (icon) {
+          if (isOpen) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
+          } else {
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+          }
+        }
+      });
+
+      // Close mobile menu when any navigation link is clicked
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            const icon = menuToggle.querySelector('i');
+            if (icon) {
+              icon.classList.remove('fa-xmark');
+              icon.classList.add('fa-bars');
+            }
+          }
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+          navMenu.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          const icon = menuToggle.querySelector('i');
+          if (icon) {
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+          }
+        }
+      });
+    }
+  </script>
 
 </body>
 </html>
